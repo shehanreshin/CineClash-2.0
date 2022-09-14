@@ -1,9 +1,10 @@
+from random import randint
 from bs4 import BeautifulSoup
 import requests
 import re
 import pandas as pd
 
-#grabbing the top 250 movies from IMDb
+#grabbing the top 250 series from IMDb
 url = 'https://www.imdb.com/chart/toptv/?ref_=nv_tvv_250'
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "html.parser")
@@ -12,10 +13,10 @@ crew = [a.attrs.get('title') for a in soup.select('td.titleColumn a')]
 ratings = [b.attrs.get('data-value')
         for b in soup.select('td.posterColumn span[name=ir]')]
 
-#for storing movie information
-movie_list = []
+#for storing series information
+series_list = []
 
-#extracting individual movie data
+#extracting individual series data
 for index in range(0, len(movies)):
     movie_input = movies[index].get_text()
     movie = (' '.join(movie_input.split()).replace('.', ''))
@@ -25,8 +26,12 @@ for index in range(0, len(movies)):
             "rating": ratings[index],
             "year": year}
 
-    movie_list.append(data)
- 
-# printing top 250 movies along with their ratings
-for movie in movie_list:
-    print(f"{movie['movie_title']} ({movie['year']}) - {float(movie['rating']):.2f}")
+    series_list.append(data)
+"""
+# printing top 250 series along with their ratings
+for series in series_list:
+    print(f"{series['movie_title']} ({series['year']}) - {float(series['rating']):.2f}")
+"""
+def get_series():
+        series = series_list[randint(0,249)]
+        print(f"{series['movie_title']} ({series['year']}) - {float(series['rating']):.2f}")

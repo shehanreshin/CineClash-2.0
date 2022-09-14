@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import pandas as pd
+from random import randint
 
 #grabbing the top 250 movies from IMDb
 url = 'http://www.imdb.com/chart/top'
@@ -26,7 +27,11 @@ for index in range(0, len(movies)):
             "year": year}
 
     movie_list.append(data)
- 
+"""
 # printing top 250 movies along with their ratings
 for movie in movie_list:
     print(f"{movie['movie_title']} ({movie['year']}) - {float(movie['rating']):.2f}")
+"""
+def get_movie():
+        movie = movie_list[randint(0,249)]
+        print(f"{movie['movie_title']} ({movie['year']}) - {float(movie['rating']):.2f}")
