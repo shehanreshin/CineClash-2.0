@@ -1,17 +1,9 @@
-from bs4 import BeautifulSoup
-import requests
 import re
-import pandas as pd
 from random import randint
+from grab import grab_top
 
 #grabbing the top 250 movies from IMDb
-url = 'http://www.imdb.com/chart/top'
-response = requests.get(url)
-soup = BeautifulSoup(response.text, "html.parser")
-movies = soup.select('td.titleColumn')
-crew = [a.attrs.get('title') for a in soup.select('td.titleColumn a')]
-ratings = [b.attrs.get('data-value')
-        for b in soup.select('td.posterColumn span[name=ir]')]
+movies, ratings = grab_top("http://www.imdb.com/chart/top")
 
 #for storing movie information
 movie_list = []
